@@ -1,0 +1,28 @@
+shared:
+  image: node:12
+# Template parameters can be overridden at pipeline scope.
+# Overrides the parameter "music" from the template (screwdriver-examples/parameters-example) used by the jobs
+# at pipeline scope which get applied to all the jobs, unless the job overrides it.
+parameters:
+  music: [jazz, rock]
+
+jobs:
+  # Inherits parameters "color" and "sports" from the template.
+  #
+  # Since the parameter "music" from the template is overridden at the pipeline scope,
+  # it is not is not inherited at job scope.
+  default_template_params:
+    requires: [~pr, ~commit]
+    template: screwdriver-examples/parameters-example@latest
+
+  # Inherits parameter "sports" from the template.
+  #
+  # Since the parameter "music" from the template is overridden at the pipeline scope,
+  # it is not is not inherited at job scope.
+  #
+  # Overrides the parameter "color" from the template.
+  override_template_params:
+    requires: default_template_params
+    template: screwdriver-examples/parameters-example@latest
+    parameters:
+      color: [ red, blue ]
