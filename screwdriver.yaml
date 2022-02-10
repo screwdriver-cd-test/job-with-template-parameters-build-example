@@ -4,7 +4,7 @@ shared:
 # Overrides the parameter "music" from the template (screwdriver-examples/parameters-example) used by the jobs
 # at pipeline scope which get applied to all the jobs, unless the job overrides it.
 parameters:
-  music: [jazz, rock]
+  music: [jazz, rock, blues]
 
 jobs:
   # Inherits parameters "color" and "sports" from the template.
